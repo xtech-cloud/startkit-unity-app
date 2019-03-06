@@ -1,0 +1,26 @@
+[
+    {
+        "text":"username_not_allow_empty",
+        "values":{
+            "zh_CN":"用户名不能为空"
+        }
+    },
+    {
+        "text":"password_not_allow_empty",
+        "values":{
+            "zh_CN":"密码不能为空"
+        }
+    },
+    {
+        "text":"username_not_exists",
+        "values":{
+            "zh_CN":"用户名不存在"
+        }
+    },
+    {
+        "text":"password_error",
+        "values":{
+            "zh_CN":"密码错误"
+        }
+    }
+]
