@@ -11,6 +11,8 @@ public class SignInUI
 	public InputField inputUsername;
 	public InputField inputPassword;
 	public Button btnSignin;
+	public Button btnSignup;
+	public Button btnOfflineEnter;
 	public Text txtError;
 }
 

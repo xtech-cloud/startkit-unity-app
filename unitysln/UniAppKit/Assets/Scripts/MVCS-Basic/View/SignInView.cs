@@ -30,11 +30,13 @@ public class SignInView : View
 	protected override void bindEvents()
 	{
 		uiSignIn.btnSignin.onClick.AddListener(onSignInClick);
+		uiSignIn.btnOfflineEnter.onClick.AddListener(onOfflineEnterClick);
 	}
 
 	protected override void unbindEvents()
 	{
 		uiSignIn.btnSignin.onClick.RemoveListener(onSignInClick);
+		uiSignIn.btnOfflineEnter.onClick.RemoveListener(onOfflineEnterClick);
 	}
 
 	protected override void dismantle()
@@ -69,6 +71,13 @@ public class SignInView : View
 		}
 
 		service.CallLogin(username, password);
+	}
+
+	private void onOfflineEnterClick()
+	{
+		AccountModel.Account account = new AccountModel.Account();
+        account.accountID = AccountModel.OFFLINE_ACCOUNT_ID;
+		(modelCenter_.FindModel(AccountModel.NAME) as AccountModel).UpdateActiveAccount(account);
 	}
 
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using XTC.MVCS;
 
 public class SignInController : Controller
@@ -28,7 +27,9 @@ public class SignInController : Controller
     {
         if (_status.latestError.IsOK)
         {
-			SceneManager.LoadScene("Lobby");
+            AccountModel.Account account = new AccountModel.Account();
+            account.accountID = "admin";
+			(modelCenter_.FindModel(AccountModel.NAME) as AccountModel).UpdateActiveAccount(account);
         }
         else
         {

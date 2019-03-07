@@ -30,7 +30,8 @@ public class AccountService : Service
         param.Add("userid", new Any(_userid));
         post("/account/profile/fetch", param, (_reply) =>
         {
-            //model.UpdateLoginResult(Error.NewAccessErr(_reply));
+            model.SaveProfile("{}");
+            model.UpdateEnterLobby();
         }, (_error) =>
         {
             Error err = Error.NewAccessErr(_error);

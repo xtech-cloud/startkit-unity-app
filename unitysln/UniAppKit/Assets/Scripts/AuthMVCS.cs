@@ -27,6 +27,13 @@ public class AuthMVCS : RootMono
         QuitDialogView viewQuitDialog = new QuitDialogView();
         framework.viewCenter.Register(QuitDialogView.NAME, viewQuitDialog);
 
+        // account
+        AccountService serviceAccount = new AccountService();
+        AccountModel modelAccount = new AccountModel();
+        AccountController controllerAccount = new AccountController();
+        framework.modelCenter.Register(AccountModel.NAME, modelAccount);
+        framework.controllerCenter.Register(AccountController.NAME, controllerAccount);
+        framework.serviceCenter.Register(AccountService.NAME, serviceAccount);
 
         //signin
         SignInView viewSignIn = new SignInView();
