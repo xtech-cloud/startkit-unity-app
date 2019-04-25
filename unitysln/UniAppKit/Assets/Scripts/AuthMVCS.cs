@@ -41,10 +41,12 @@ public class AuthMVCS : RootMono
         SignInController controllerSignIn = new SignInController();
         SignInService serviceSignIn = new SignInService();
 
-        serviceSignIn.domain = "http://127.0.0.1";
+        
+        serviceSignIn.domain = Constant.Domain;
+        /* 
         serviceSignIn.MockProcessor = AuthMock.Processor;
         serviceSignIn.useMock = true;
-
+        */
         framework.viewCenter.Register(SignInView.NAME, viewSignIn);
         framework.modelCenter.Register(SignInModel.NAME, modelSignIn);
         framework.controllerCenter.Register(SignInController.NAME, controllerSignIn);

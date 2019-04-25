@@ -22,5 +22,29 @@
         "values":{
             "zh_CN":"密码错误"
         }
+    },
+    {
+        "text":"new_project_name_not_allow_empty",
+        "values":{
+            "zh_CN":"作品名称不能为空"   
+        }
+    },
+    {
+        "text":"new_project_name_is_exists",
+        "values":{
+            "zh_CN":"作品名称已存在"   
+        }
+    },
+    {
+        "text":"bootloader_step_fetch_profile",
+        "values":{
+            "zh_CN":"正在获取用户数据"   
+        }
+    },
+    {
+        "text":"bootloader_step_refresh_profile",
+        "values":{
+            "zh_CN":"正在加载用户数据"   
+        }
     }
 ]

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,11 +7,11 @@ using UnityEngine.SceneManagement;
 using XTC.MVCS;
 using XTC.Types;
 using XTC.Text;
+using XTC.Logger;
 
 public class LauncherMVCS : RootMono
 {
     public UIFacade[] uIFacades;
-    
 
     void Awake()
     {
@@ -36,8 +37,12 @@ public class LauncherMVCS : RootMono
     {
         Debug.Log("---------------  Start ------------------------");
 
-        Translator.language = "zh_CN";
-        Translator.MergeFromResource("translator/UI", true);
+        DataCache.gravity = Physics.gravity;
+
+        mergeLanguageFiles();
+
+        migrateData();
+
 
         StartCoroutine(enterAuth());
     }
@@ -75,4 +80,46 @@ public class LauncherMVCS : RootMono
         yield return new WaitForSeconds(2.0f);
 		SceneManager.LoadScene("Auth");
     }
+
+    private void mergeLanguageFiles()
+    {
+        Translator.language = "zh_CN";
+        Translator.MergeFromResource("translator/UI", true);
+    }
+
+    private void migrateData()
+    {
+
+        string srcDir = Path.Combine(Application.streamingAssetsPath, "db");
+        string srcFile = Path.Combine(srcDir, Constant.DataBaseFile);
+
+        if(!Directory.Exists(Constant.DataBaseDir))
+        {
+            Directory.CreateDirectory(Constant.DataBaseDir);
+        }
+
+        if(!File.Exists(Constant.DataBasePath))
+        {
+            File.Copy(srcFile, Constant.DataBasePath);
+        }
+
+        Error error;
+        SQLiteUtility.Open(Constant.DataBasePath, out error);
+
+        if(Error.OK != error)
+        {
+            this.LogError(error);
+            return;
+        }
+
+        AccountMock.AutoMigrate();
+
+
+        SQLiteUtility.Close(Constant.DataBasePath, out error);
+        if(Error.OK != error)
+        {
+            this.LogError(error);
+        }
+    }
+
 }

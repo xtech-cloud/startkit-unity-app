@@ -19,4 +19,6 @@ public class FacadeUtility
         UIFacade facade = cloneWindowTools.GetComponent<UIFacade>();
         facade.Register();
 	}
+
+	
 }
